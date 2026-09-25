@@ -12,59 +12,99 @@
   --bg:#efe6da; --fg:#242220; --fg-soft:#6b6459; --fg-line:#24222033;
   --accent:#d98a9c; --accent-on:#242220;
   --panel-bg:#242220; --panel-fg:#efe6da;
-  --page-bg:#f4f2ee; --ink:#1a1a1a; --ink-soft:#5c5850; --line:#00000018;
+  --page-bg:#f4f2ee; --ink:#1a1a1a; --ink-soft:#5c5850; --line:#00000018; --card-bg:#ffffff;
   --font-display:Spectral,serif; --font-body:'Albert Sans',sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --page-bg:#171614; --ink:#f2efe9; --ink-soft:#b8b3a8; --line:#ffffff22; color-scheme: dark; }
+  :root{ --page-bg:#171614; --ink:#f2efe9; --ink-soft:#b8b3a8; --line:#ffffff22; --card-bg:#211f1c; color-scheme: dark; }
 }
 *{box-sizing:border-box}
 body{background:var(--page-bg); color:var(--ink); margin:0; font-family:var(--font-body);}
+a{color:inherit}
 
-.hero{ padding: 64px 20px 44px; background:var(--bg); color:var(--fg); }
-.hero-inner{ max-width:640px; margin:0 auto; }
+.nav{ position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:14px 20px; background:color-mix(in srgb, var(--page-bg) 88%, transparent);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+.nav-name{ font-family:var(--font-display); font-weight:500; font-size:19px; text-decoration:none; color:var(--ink); }
+.nav-cta{ font:500 13px/1 var(--font-body); padding:10px 16px; border-radius:999px; background:var(--accent); color:var(--accent-on); text-decoration:none; white-space:nowrap; }
+
+.hero{ padding: 56px 20px 44px; background:var(--bg); color:var(--fg); }
+.hero-inner{ max-width:760px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:36px; align-items:center; }
+@media (max-width:680px){ .hero-inner{ grid-template-columns:1fr; } }
 .eyebrow{ font:500 12px/1 var(--font-body); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
-.h1{ font-family:var(--font-display); font-weight:500; font-size:clamp(34px,9vw,56px); line-height:1.05; margin:0 0 16px; text-wrap:balance; color:var(--fg); }
-.lede{ font:400 17px/1.6 var(--font-body); color:var(--fg-soft); max-width:46ch; margin:0 0 28px; }
+.h1{ font-family:var(--font-display); font-weight:500; font-size:clamp(34px,7.5vw,54px); line-height:1.05; margin:0 0 16px; text-wrap:balance; color:var(--fg); }
+.lede{ font:400 16px/1.6 var(--font-body); color:var(--fg-soft); max-width:46ch; margin:0 0 26px; }
 .cta-row{ display:flex; flex-wrap:wrap; gap:10px; }
-.btn{ font:500 14px/1 var(--font-body); padding:14px 24px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; }
+.btn{ font:500 14px/1 var(--font-body); padding:14px 22px; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; }
 .btn-primary{ background:var(--accent); color:var(--accent-on); }
 .btn-ghost{ background:transparent; color:var(--fg); border-color:var(--fg-line); }
+
+.ph{ aspect-ratio:1/1; border-radius:14px; background:color-mix(in srgb, var(--accent) 12%, var(--bg)); border:1px solid color-mix(in srgb, var(--accent) 30%, transparent); display:flex; align-items:center; justify-content:center; color:color-mix(in srgb, var(--accent) 65%, var(--fg)); }
+.ph svg{ width:26%; height:26%; }
+.ph-hero{ aspect-ratio:4/5; }
 
 .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .stat{ background:var(--page-bg); padding:20px; }
 .stat b{ display:block; font:500 26px/1.1 var(--font-display); color:var(--ink); }
 .stat span{ font:400 12px/1.4 var(--font-body); color:var(--ink-soft); }
 
-.section{ max-width:640px; margin:0 auto; padding:44px 20px; }
-.section h2{ font-family:var(--font-display); font-weight:500; font-size:24px; margin:0 0 20px; color:var(--ink); text-wrap:balance; }
-.chips{ display:flex; flex-wrap:wrap; gap:8px; }
-.chip{ font:500 13px/1 var(--font-body); padding:11px 18px; border-radius:999px; background:color-mix(in srgb, var(--accent) 16%, var(--page-bg)); color:var(--ink); }
+.section{ max-width:760px; margin:0 auto; padding:48px 20px; }
+.section h2{ font-family:var(--font-display); font-weight:500; font-size:26px; margin:0 0 22px; color:var(--ink); text-wrap:balance; }
+.section-note{ font:400 14px/1.6 var(--font-body); color:var(--ink-soft); margin:-12px 0 22px; }
+
+.gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+@media (max-width:520px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+
+.svc-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+@media (max-width:520px){ .svc-grid{ grid-template-columns:1fr; } }
+.svc-card{ background:var(--card-bg); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; gap:14px; align-items:flex-start; }
+.svc-ph{ width:52px; height:52px; flex:0 0 auto; border-radius:10px; background:color-mix(in srgb, var(--accent) 14%, var(--page-bg)); display:flex; align-items:center; justify-content:center; color:color-mix(in srgb, var(--accent) 70%, var(--ink)); }
+.svc-ph svg{ width:46%; height:46%; }
+.svc-title{ font:500 16px/1.3 var(--font-body); color:var(--ink); margin:0 0 4px; }
+.svc-desc{ font:400 13px/1.5 var(--font-body); color:var(--ink-soft); margin:0; }
+
+.team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:18px; }
+.team-card{ text-align:center; }
+.team-avatar{ width:64px; height:64px; margin:0 auto 10px; border-radius:50%; background:color-mix(in srgb, var(--accent) 20%, var(--page-bg)); color:color-mix(in srgb, var(--accent) 75%, var(--ink)); display:flex; align-items:center; justify-content:center; font:500 20px/1 var(--font-display); }
+.team-name{ font:500 14px/1.3 var(--font-body); color:var(--ink); margin:0 0 2px; }
+.team-role{ font:400 12px/1.3 var(--font-body); color:var(--ink-soft); margin:0; }
 
 .about-box{ background:var(--panel-bg); color:var(--panel-fg); border-radius:14px; padding:28px 26px; font:400 16px/1.65 var(--font-body); }
 .about-box b{ font-weight:500; }
+
+.reviews-strip{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.review-pill{ font:500 13px/1 var(--font-body); padding:10px 16px; border-radius:999px; background:color-mix(in srgb, var(--accent) 14%, var(--page-bg)); color:var(--ink); }
 
 .contact{ display:flex; flex-direction:column; gap:0; font:400 15px/1.6 var(--font-body); }
 .contact-row{ display:flex; justify-content:space-between; gap:12px; padding:16px 0; border-top:1px solid var(--line); flex-wrap:wrap; }
 .contact-row span:first-child{ color:var(--ink-soft); }
 .contact-row a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink-soft); }
 
-.foot{ padding:24px 20px 48px; text-align:center; }
+.foot{ padding:28px 20px 52px; text-align:center; display:flex; flex-direction:column; gap:8px; }
 .foot a{ font:500 13px/1 var(--font-body); color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); }
+.foot small{ font:400 12px/1.5 var(--font-body); color:var(--ink-soft); opacity:.7; }
 </style>
 </head>
 <body>
 
+<div class="nav">
+  <a class="nav-name" href="#">Yana Art</a>
+  <a class="nav-cta" href="tel:+998881675171">Записаться</a>
+</div>
+
 <div class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Nail House · студия и школа маникюра</p>
-    <h1 class="h1">Yana Art</h1>
-    <p class="lede">Nail House с двумя филиалами и собственной школой — курсы для мастеров и с нуля.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="tel:+998881675171">Позвонить +998 88 167 51 71</a>
-      <a class="btn btn-ghost" href="https://yandex.uz/maps/org/yana_art/230122223872/" target="_blank" rel="noopener">На Яндекс.Картах</a>
+    <div>
+      <p class="eyebrow">Nail House · студия и школа маникюра</p>
+      <h1 class="h1">Yana Art</h1>
+      <p class="lede">Nail House с двумя филиалами и собственной школой — большая команда мастеров и курсы с нуля.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:+998881675171">Позвонить +998 88 167 51 71</a>
+        <a class="btn btn-ghost" href="https://yandex.uz/maps/org/yana_art/230122223872/" target="_blank" rel="noopener">На Яндекс.Картах</a>
+      </div>
     </div>
+    <div class="ph ph-hero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
   </div>
 </div>
 
@@ -75,29 +115,97 @@ body{background:var(--page-bg); color:var(--ink); margin:0; font-family:var(--fo
 </div>
 
 <div class="section">
+  <h2>Работы</h2>
+  <p class="section-note">Слоты под ваши лучшие фото — заполняются реальными работами перед запуском.</p>
+  <div class="gallery">
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+    <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+  </div>
+</div>
+
+<div class="section">
   <h2>Услуги</h2>
-  <div class="chips">
-    <span class="chip">Маникюр</span>
-    <span class="chip">Обучение с нуля</span>
-    <span class="chip">Курсы для мастеров</span>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+      <div><p class="svc-title">Маникюр</p></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+      <div><p class="svc-title">Обучение с нуля</p></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
+      <div><p class="svc-title">Курсы для мастеров</p><p class="svc-desc">Повышение квалификации</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Мастера</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">Л</div>
+      <p class="team-name">Лера</p>
+      <p class="team-role">Топ-мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">К</div>
+      <p class="team-name">Карина</p>
+      <p class="team-role">Топ-мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">Л</div>
+      <p class="team-name">Лена</p>
+      <p class="team-role">Мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">А</div>
+      <p class="team-name">Адолат</p>
+      <p class="team-role">Топ-мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">Б</div>
+      <p class="team-name">Барно</p>
+      <p class="team-role">Мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">З</div>
+      <p class="team-name">Зульфия</p>
+      <p class="team-role">Топ-мастер</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">И</div>
+      <p class="team-name">Ира</p>
+      <p class="team-role">Топ-мастер</p>
+    </div>
   </div>
 </div>
 
 <div class="section">
   <h2>О студии</h2>
-  <div class="about-box">Из шапки профиля: два филиала — <b>Госпитальный и М.Горький</b>, собственные курсы для будущих и практикующих мастеров.</div>
+  <div class="about-box">Из шапки профиля: два филиала — <b>Госпитальный и М. Горький</b>, собственные курсы для будущих и практикующих мастеров.</div>
+
 </div>
 
 <div class="section">
   <h2>Контакты</h2>
   <div class="contact">
-    <div class="contact-row"><span>Адрес</span><span>Ташкент, Мирабадский район, массив Госпитальный, 1 (+ филиал М. Горький)</span></div>
-    <div class="contact-row"><span>Телефон</span><a href="tel:+998881675171">+998 88 167 51 71</a></div>
+    <div class="contact-row"><span>Адрес</span><span>Ташкент, Мирабадский район, массив Госпитальный, 1</span></div>
+    <div class="contact-row"><span>Филиал Госпитальный</span><a href="tel:+998881675171">+998 88 167 51 71</a></div>
+    <div class="contact-row"><span>Филиал М. Горький</span><a href="tel:+998880085171">+998 88 008 51 71</a></div>
     <div class="contact-row"><span>Instagram</span><a href="https://www.instagram.com/yana_art_nail_house" target="_blank" rel="noopener">@yana_art_nail_house</a></div>
   </div>
 </div>
 
-<div class="foot"><a href="https://yandex.uz/maps/org/yana_art/230122223872/" target="_blank" rel="noopener">Карточка на Яндекс.Картах &rarr;</a></div>
+<div class="foot">
+  <a href="https://yandex.uz/maps/org/yana_art/230122223872/" target="_blank" rel="noopener">Карточка на Яндекс.Картах &rarr;</a>
+  <small>Макет подготовлен на основе данных Яндекс.Карт и Instagram — фото добавляются перед публикацией.</small>
+</div>
 
 </body>
 </html>
